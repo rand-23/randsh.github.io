@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" 
+href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ <title>Computer Component Order Form</title>
+
+ <style>
+ body {
+ background-color: #D9D9D6; /* Lighter grey background color */
+ font-family: Arial, sans-serif; 
+ }
+ .container {
+ background-color: #FAF9F6;
+ padding: 20px;
+ border-radius: 10px;
+ box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+ }
+ h1 {
+ color: #5A5A5A; /* Darker grey heading color */
+ }
+ 
+ /* Center the button */
+ .center-button {
+ display: flex;
+ justify-content: center;
+}
+ 
+ </style>
+</head>
+<body>
+ <div class="container mt-5">
+ <h1>Computer Component Order Form</h1>
+ <form id="orderForm">
+ <div class="form-group">
+ <label for="component">Select Component:</label>
+ <select class="form-control" id="component" name="component">
+ <option value="cpu">CPU</option>
+ <option value="gpu">GPU</option>
+ <option value="ram">RAM</option>
+ <option value="storage">Storage</option>
+ <option value="motherboard">Motherboard</option>
+ </select>
+ </div>
+ <div class="form-group">
+ <label for="quantity">Quantity:</label>
+
+ <input type="number" class="form-control" id="quantity" name="quantity" min="1" 
+value="1">
+ </div>
+ <div class="form-group">
+ <label for="comments"> Special Note: </label>
+ <textarea class="form-control" id="comments" name="comments" 
+rows="3"></textarea>
+ </div>
+ <button type="submit" class="btn btn-primary" >Submit Order</button>
+ </form>
+ <div id="orderResult" class="mt-3"></div>
+ </div>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script>
+ $(document).ready(function() {
+ $("#orderForm").submit(function(event) {
+ event.preventDefault();
+ const formData = $("#orderForm").serializeArray();
+ const orderData = {};
+ formData.forEach(function(input) {
+
+ orderData[input.name] = input.value;
+ });
+ // I can now send this data to a server for processing
+ // For this example, I'll just display the order data
+ $("#orderResult").html("<h2>Order Summary</h2>");
+ for (const key in orderData) {
+ $("#orderResult").append(`<p><strong>${key}:</strong> ${orderData[key]}</p>`);
+ }
+ });
+ });
+ </script>
+</body>
+</html>
